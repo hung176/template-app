@@ -6,7 +6,8 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App {...window.templateProps} />
+    {/* <App {...window.templateProps} word="abc"/> */}
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

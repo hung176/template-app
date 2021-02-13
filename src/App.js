@@ -1,23 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import FlashCardTemp from './FlashCardTemp/FlashCardTemp';
+import CardEdit from './CardEdit/CardEdit';
 
-function App({ name }) {
+function App() {
+  const [loading, setLoading] = useState(false);
+  const [word, setWord] = useState('elephant');
+  const [words, setWords] = useState([]);
+
+  const fetchWord = async (word) => {
+    try {
+      setLoading(true);
+      const result = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en_US/${word}`);
+      const wordDataJson = await result.json();
+      const wordData = wordDataJson.map(wordInfor => ({
+        pronunciation: {
+          text: wordInfor['phonetics'][0]['text'],
+          audio: wordInfor['phonetics'][0]['audio']
+        },
+        definitions: wordInfor['meanings'].map(meaning => meaning['definitions']).flat()
+      }));
+  
+      setWords(wordData);
+      setLoading(false);
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchWord(word);
+  }, [word]);
+
+  console.log(words);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-         Hello {name}
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <CardEdit setWord={setWord} />
+      <FlashCardTemp
+        word={word}
+        loading={loading}
+        words={words}
+      />
     </div>
   );
 }
