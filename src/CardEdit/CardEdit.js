@@ -1,21 +1,30 @@
 import React, { useState } from 'react';
+import Select from 'react-select';
+import { animalName } from '../data/animals';
+import './styles.css';
 
 function CardEdit({ setWord }) {
-  const [wordSearch, setWordSearch] = useState('');
+  const [wordSearch, setWordSearch] = useState({});
+
+  const optionAnimals = animalName.map(animal => ({
+    value: animal,
+    label: animal
+  }));
 
   return (
     <div>
       <form onSubmit={e => {
         e.preventDefault();
-        setWord(wordSearch);
+        setWord(wordSearch['value']);
       }}>
-        <input
-          type="text"
-          name="word"
-          value={wordSearch}
-          onChange={e => setWordSearch(e.target.value)}
+        <Select
+          className="word-search"
+          options={optionAnimals}
+          placeholder="Select a animal"
+          isSearchable
+          onChange={setWordSearch}
         />
-        <button type="submit">Submit</button>
+        <button className="btn" type="submit">Preview</button>
       </form>
     </div>
   );

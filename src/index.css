@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  background: rgb(218, 216, 216);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -11,6 +12,7 @@ code {
 
 .App {
   display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

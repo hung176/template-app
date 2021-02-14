@@ -1,45 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Krona+One&display=swap");
 
 .container {
+  width: 630px;
+  box-sizing: border-box;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: center;
   justify-content: center;
-}
-.card {
-  margin-top: 10px;
-  width: 300px;
-  height: 350px;
-  background: #82CACD;
-  border-radius: 50px;
-  border: 5px solid #ffffff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-img {
-  width: 250px;
-  height: 250px;
-}
-
-.caption, h1 {
-  color: #ffffff;
-  font: normal 600 17vw/1 sans-serif;
-  font-size: 40px;
-  font-family: "Krona One", sans-serif;
-  /* margin-top: 10px; */
-}
-
-.description {
-  color: #fff;
-  font-size: 20px;
-  padding: 0 10px 10px 10px;
-  text-align: left;
-}
-.card a {
-  text-decoration: none;
+  padding: 10px;
 }
 
