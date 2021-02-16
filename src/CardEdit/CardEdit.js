@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
-import { animalName } from '../data/animals';
 import './styles.css';
 
-function CardEdit({ setWord }) {
+function CardEdit({ setWord, animalImages }) {
   const [wordSearch, setWordSearch] = useState({});
 
-  const optionAnimals = animalName.map(animal => ({
-    value: animal,
-    label: animal
+  const optionAnimals = animalImages.map(image => ({
+    value: image.title,
+    label: image.title
   }));
 
   return (
