@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
-import './styles.css';
 
 function CardEdit({ setWord, animalImages }) {
   const [wordSearch, setWordSearch] = useState({});
-
-  const optionAnimals = animalImages.map(image => ({
-    value: image.title,
-    label: image.title
-  }));
+  const optionAnimals = 
+    animalImages
+      .map(animal => animal.title)
+      .sort()
+      .map(animalName => ({
+        value: animalName,
+        label: animalName
+      }));
 
   return (
     <div>

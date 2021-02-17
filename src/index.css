@@ -16,3 +16,21 @@ code {
   justify-content: center;
   align-items: center;
 }
+
+.spin {
+  border: 5px solid lightgray;
+  border-top: 5px solid rgb(164, 225, 243);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg)
+  }
+  100% {
+    transform: rotate(360deg)
+  }
+}

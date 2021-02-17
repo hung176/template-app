@@ -1,22 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import FlashCardTemp from './FlashCardTemp/FlashCardTemp';
-import CardEdit from './CardEdit/CardEdit';
+import FlashCardTemp from './FlashCardTemp';
+import CardEdit from './CardEdit';
+// import Button from './Button';
 
 import { fetchPhotos } from './animalImg';
 import { capitalizeFirstLetter } from './helper';
 
+import './App.css';
+
 function App() {
-  const [loading, setLoading] = useState(false);
+  const [loadingWord, setLoadingWord] = useState(false);
   const [word, setWord] = useState('Elephant');
   const [words, setWords] = useState({});
 
   const [animalImages, setAnimalImages] = useState([]);
-  const [loadingImage, setLoadingImage] = useState(false);
   const [imageUrl, setImageUrl] = useState('');
+
+  // const [generated, setGenerated] = useState(null)
 
   const fetchWord = async (word) => {
     try {
-      setLoading(true);
+      setLoadingWord(true);
       const result = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en_US/${word}`);
       const wordDataJson = await result.json();
       const wordData = {
@@ -26,7 +30,7 @@ function App() {
       };
   
       setWords(wordData);
-      setLoading(false);
+      setLoadingWord(false);
     } catch (error) {
       throw new Error(error);
     }
@@ -36,12 +40,10 @@ function App() {
     fetchWord(word);
 
     fetchPhotos().then(res => {
-      setLoadingImage(true);
       const { photoset: { photo } } = res;
       const imageUrl = photo.filter(photoItem => photoItem.title === word)[0]['url_o'];
       setAnimalImages(photo);
       setImageUrl(imageUrl);
-      setLoadingImage(false);
     })
 
   }, [word, setAnimalImages]);
@@ -51,10 +53,15 @@ function App() {
       <h1>ANIMALS FLASHCARD FOR KID</h1>
       <CardEdit setWord={setWord} animalImages={animalImages} />
       <FlashCardTemp
-        loading={loading}
+        loadingWord={loadingWord}
         imageUrl={imageUrl}
         words={words}
       />
+      {/* <Button
+        text="GeneratePDF"
+        generated={generated}
+        setGenerated={setGenerated}
+      /> */}
     </div>
   );
 }
