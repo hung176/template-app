@@ -1,50 +1,47 @@
 import React from 'react';
-import axios from "axios";
 
-export default function Button({ text, setGenerated }) {
-  const generatePDF = () => {
-    const url = "https://api.stg.make.cm/make/t/4b99e8f1-e0d3-4d20-82bb-e925715ef30f/sync";
-
-    const headers = {
-      'Content-Type': 'application/json',
-      'X-MAKE-API-KEY': 'HsB5+CDZdrs8GOMMG449IkxuxCqkiPCjbQAbZoDv'
-    };
-
-    const data = {
-      customSize: {
-        width: 1000,
-        height: 1000,
-        unit: "px"
-      },
-      format: "pdf",
-      fileName: "animal-flashcard",
-      contentDisposition: "inline",
+export default function Button({
+  text,
+  word,
+  imageUrl,
+  meaning,
+  isGenerating,
+  setIsGenerating,
+  setGenerated
+}) {
+  const generatePDF = async () => {
+    setIsGenerating(true);
+    const apiUrl = 'https://api.make.cm/make/t/964d132b-0be6-47f3-ba74-41f94bb35bc1/sync';
+    const params = {
+      size: 'A4',
+      format: 'pdf',
       data: {
-        
+        word, imageUrl, meaning
       }
     };
 
-    axios
-        .post(url, data, {
-          headers: headers
-        })
-        .then((response) => {
-          const generatedPDF = response.data.resultUrl
-          console.log(generatePDF);
-          setGenerated(generatedPDF);
-        })
-        .catch((error) => {
-          throw new Error(error);
-        });
-    
+    const { resultUrl } = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-MAKE-API-KEY': 'HsB5+CDZdrs8GOMMG449IkxuxCqkiPCjbQAbZoDv'
+      },
+      body: JSON.stringify(params)
+    }).then(res => res.json())
+
+    setGenerated(resultUrl);
+    setIsGenerating(false);
   }
 
   return (
     <div>
       <button
         onClick={generatePDF}
+        disabled={isGenerating}
+        className={isGenerating ? 'disabled' : 'btn'}
       >
-        {text}
+        {isGenerating ? 'Generating...' : text}
+        {isGenerating && <span className="spinner-button" />}
       </button>
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import FlashCardTemp from './FlashCardTemp';
 import CardEdit from './CardEdit';
-// import Button from './Button';
+import Button from './Button';
 
 import { fetchPhotos } from './animalImg';
 import { capitalizeFirstLetter } from './helper';
@@ -16,7 +16,8 @@ function App() {
   const [animalImages, setAnimalImages] = useState([]);
   const [imageUrl, setImageUrl] = useState('');
 
-  // const [generated, setGenerated] = useState(null)
+  const [isGenerating, setIsGenerating] = useState(false)
+  const [generated, setGenerated] = useState(null)
 
   const fetchWord = async (word) => {
     try {
@@ -37,6 +38,7 @@ function App() {
   }
 
   useEffect(() => {
+    setGenerated(null)
     fetchWord(word);
 
     fetchPhotos().then(res => {
@@ -57,11 +59,25 @@ function App() {
         imageUrl={imageUrl}
         words={words}
       />
-      {/* <Button
+      <Button
         text="GeneratePDF"
-        generated={generated}
+        word={words.word}
+        meaning={words.meaning}
+        imageUrl={imageUrl}
+        isGenerating={isGenerating}
+        setIsGenerating={setIsGenerating}
         setGenerated={setGenerated}
-      /> */}
+      />
+      <a
+         href={generated}
+         target="_blank"
+         rel="noreferrer"
+         style={{
+           visibility: generated ? 'initial' : 'hidden'
+         }}
+      >
+        Download PDF
+      </a>
     </div>
   );
 }
