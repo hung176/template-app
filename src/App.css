@@ -1,4 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Krona+One&display=swap");
+html {
+  font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+}
 
 .container {
   width: 650px;
@@ -82,4 +84,53 @@
   100% {
     transform: rotate(360deg)
   }
+}
+
+/* Anchor tag */
+
+.anchor-pdf a {
+  border-radius: 2px;
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  margin: 25px;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  width: 100px;
+}
+
+.anchor-pdf a span {
+  background: #f2594b;
+  border-radius: 4px;
+  color: #ffffff;
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: normal;
+  padding: 5px 10px;
+  position: relative;
+  text-transform: uppercase;
+  z-index: 1;
+}
+
+.anchor-pdf a:hover {
+  border-color: #9fb4cc;
+}
+
+.anchor-pdf a:active {
+  background: #dae0e8;
+  box-shadow: inset 0 2px 2px rgba(0, 0, 0, .25);
+}
+
+.anchor-pdf a span:first-child {
+  display: none;
+}
+
+.anchor-pdf a:hover span:first-child {
+  display: inline-block;
+}
+
+.anchor-pdf a:hover span:last-child {
+  display: none;
 }

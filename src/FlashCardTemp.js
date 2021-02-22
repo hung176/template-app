@@ -4,12 +4,12 @@ import CardFront from './CardFront';
 import CardBack from './CardBack';
 import Loading from './Loading';
 
-const FlashCardTemp = ({ imageUrl, words, loadingWord }) => {
+const FlashCardTemp = ({ imageUrl, words, loadingWord, color }) => {
   const { word, meaning, audio } = words;
 
   return (
     <div className="container">
-      <CardContainer>
+      <CardContainer color={color}>
         {loadingWord && <Loading />}
         {!loadingWord && <CardFront
           audio={audio}
@@ -19,7 +19,7 @@ const FlashCardTemp = ({ imageUrl, words, loadingWord }) => {
         />}
       </CardContainer>
       
-      <CardContainer>
+      <CardContainer color={color}>
         {loadingWord && <Loading />}
         {!loadingWord && <CardBack word={word} meaning={meaning} />}
       </CardContainer>

@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { TwitterPicker } from 'react-color'
+
 import FlashCardTemp from './FlashCardTemp';
 import CardEdit from './CardEdit';
 import Button from './Button';
+import Anchor from './Anchor';
 
 import { fetchPhotos } from './animalImg';
 import { capitalizeFirstLetter } from './helper';
@@ -11,6 +14,7 @@ import './App.css';
 function App() {
   const [loadingWord, setLoadingWord] = useState(false);
   const [word, setWord] = useState('Elephant');
+  const [color, setColor] = useState({ hex: '#0693E3' });
   const [words, setWords] = useState({});
 
   const [animalImages, setAnimalImages] = useState([]);
@@ -50,34 +54,41 @@ function App() {
 
   }, [word, setAnimalImages]);
 
+  const handleColorChange = (color) => {
+    setColor(color);
+  };
+
   return (
     <div className="App">
-      <h1>ANIMALS FLASHCARD FOR KID</h1>
+      <h1>ANIMAL FLASHCARD FOR KID</h1>
       <CardEdit setWord={setWord} animalImages={animalImages} />
+      <TwitterPicker
+        triangle="hide"
+        color={color.hex}
+        onChange={handleColorChange}
+      />
+
       <FlashCardTemp
         loadingWord={loadingWord}
         imageUrl={imageUrl}
         words={words}
+        color={color.hex}
       />
+
       <Button
-        text="GeneratePDF"
+        text="Generate PDF"
         word={words.word}
         meaning={words.meaning}
         imageUrl={imageUrl}
+        color={color.hex}
         isGenerating={isGenerating}
         setIsGenerating={setIsGenerating}
         setGenerated={setGenerated}
       />
-      <a
-         href={generated}
-         target="_blank"
-         rel="noreferrer"
-         style={{
-           visibility: generated ? 'initial' : 'hidden'
-         }}
-      >
-        Download PDF
-      </a>
+      <Anchor
+         generated={generated}
+         isGenerating={isGenerating}
+      />
     </div>
   );
 }

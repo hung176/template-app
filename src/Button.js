@@ -4,6 +4,7 @@ export default function Button({
   text,
   word,
   imageUrl,
+  color,
   meaning,
   isGenerating,
   setIsGenerating,
@@ -16,7 +17,7 @@ export default function Button({
       size: 'A4',
       format: 'pdf',
       data: {
-        word, imageUrl, meaning
+        word, imageUrl, meaning, color
       }
     };
 
@@ -41,7 +42,6 @@ export default function Button({
         className={isGenerating ? 'disabled' : 'btn'}
       >
         {isGenerating ? 'Generating...' : text}
-        {isGenerating && <span className="spinner-button" />}
       </button>
     </div>
   );
