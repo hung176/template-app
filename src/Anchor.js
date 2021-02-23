@@ -8,7 +8,7 @@ export default function Anchor({ generated, isGenerating }) {
         target="_blank"
         rel="noreferrer"
         style={{
-          visibility: isGenerating ? 'hidden' : 'initial'
+          visibility: generated ? 'initial' : 'hidden'
         }}
       >
         <span>Download</span>

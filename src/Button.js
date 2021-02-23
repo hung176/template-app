@@ -35,11 +35,11 @@ export default function Button({
   }
 
   return (
-    <div>
+    <div className="generate-button">
       <button
         onClick={generatePDF}
         disabled={isGenerating}
-        className={isGenerating ? 'disabled' : 'btn'}
+        className={isGenerating ? 'btn-disabled' : 'btn'}
       >
         {isGenerating ? 'Generating...' : text}
       </button>
