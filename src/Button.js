@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function Button({
   text,
   word,
-  imageUrl,
+  animalData,
   color,
-  meaning,
   isGenerating,
   setIsGenerating,
-  setGenerated
+  setGenerated,
 }) {
   const generatePDF = async () => {
     setIsGenerating(true);
+    const { meaning, imageUrl } = animalData[word];
     const apiUrl = 'https://api.make.cm/make/t/964d132b-0be6-47f3-ba74-41f94bb35bc1/sync';
     const params = {
       size: 'A4',
@@ -33,6 +33,7 @@ export default function Button({
     setGenerated(resultUrl);
     setIsGenerating(false);
   }
+
 
   return (
     <div className="generate-button">

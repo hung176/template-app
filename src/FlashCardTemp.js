@@ -4,8 +4,27 @@ import CardFront from './CardFront';
 import CardBack from './CardBack';
 import Loading from './Loading';
 
-const FlashCardTemp = ({ imageUrl, words, loadingWord, color }) => {
-  const { word, meaning, audio } = words;
+const FlashCardTemp = ({ word, animalData, loadingWord, color }) => {
+
+  if (loadingWord) {
+    return (
+    <div className="container">
+      <CardContainer color={color}>
+        <Loading />
+        
+      </CardContainer>
+      
+      <CardContainer color={color}>
+        <Loading />
+  
+      </CardContainer>
+
+    </div>
+    )
+  }
+
+  const { title, meaning, audio, imageUrl } = animalData;
+  // console.log(meaning)
 
   return (
     <div className="container">
@@ -13,7 +32,7 @@ const FlashCardTemp = ({ imageUrl, words, loadingWord, color }) => {
         {loadingWord && <Loading />}
         {!loadingWord && <CardFront
           audio={audio}
-          word={word}
+          title={title}
           imageUrl={imageUrl} 
           loadingWord={loadingWord}
         />}
@@ -21,7 +40,7 @@ const FlashCardTemp = ({ imageUrl, words, loadingWord, color }) => {
       
       <CardContainer color={color}>
         {loadingWord && <Loading />}
-        {!loadingWord && <CardBack word={word} meaning={meaning} />}
+        {!loadingWord && <CardBack title={title} meaning={meaning} />}
       </CardContainer>
 
     </div>

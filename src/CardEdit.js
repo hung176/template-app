@@ -1,16 +1,11 @@
 import React from 'react';
 import Select from 'react-select';
 
-function CardEdit({ setWord, animalImages }) {
-  const optionAnimals = 
-    animalImages
-      .map(animal => animal.title)
-      .sort()
-      .map(animalName => ({
-        value: animalName,
-        label: animalName
-      }));
-
+function CardEdit({ setWord, animalData }) {
+  const optionAnimals = Object.keys(animalData).map(val => ({
+    value: val,
+    label: val
+  }));
   return (
     <Select
       className="word-search"
