@@ -5,6 +5,8 @@ export default function CardContainer({ children, color }) {
     <div
       className="card-container"
       style={{ background: color}}
-    >{children}</div>
+    >
+      {children}
+    </div>
   );
 }

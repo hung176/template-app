@@ -6,13 +6,14 @@ import FlashCardTemp from './FlashCardTemp';
 import CardEdit from './CardEdit';
 import Button from './Button';
 import Anchor from './Anchor';
+import AnimalItem from './AnimalItem';
 
-import { fetchPhotos } from './animalImg';
+import { fetchPhotos, fetchWord } from './animalImg';
 
 import './App.css';
 
 function App() {
-  const [loadingWord, setLoadingWord] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [word, setWord] = useState('Elephant');
   const [color, setColor] = useState({ hex: '#0693E3' });
 
@@ -20,14 +21,15 @@ function App() {
 
   const [isGenerating, setIsGenerating] = useState(false);
   const [generated, setGenerated] = useState(null);
-  
+
+  const [listAnimals, setListAnimals] = useState([]);
+
   const reducer = (acc, val) => {
     const newImageObject = {
       title: val['title'],
       imageUrl: val['url_o']
     }
-    if(newImageObject['title'] === word) {
-    }
+
     return {
       ...acc,
       [newImageObject.title]: {
@@ -36,43 +38,48 @@ function App() {
       }
     };
   };
- 
+
   useEffect(() => {
     // setGenerated(null)
-    const fetchWord = async () => {
+    const fetchData = async () => {
       try {
-        setLoadingWord(true);
+        setLoading(true);
         const imageAPI = await fetchPhotos();
         const newImageAPI = imageAPI.photoset.photo;
-        const newAnimalData = newImageAPI.reduce(reducer, {});
+        const newImage = newImageAPI.reduce(reducer, {});
 
-        const result = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en_US/${word}`);
-        const wordDataJson = await result.json();
-
-        const wordData = {
-          audio: wordDataJson[0]['phonetics'][0]['audio'],
-          meaning: wordDataJson[0]['meanings'][0]['definitions'][0]['definition'],
-        };
+        const wordData = await fetchWord(word);
         
-        const newestAnimal = {
-          ...newAnimalData,
+        const newAnimalData = {
+          ...newImage,
           [word]: {
-            ...newAnimalData[word],
+            ...newImage[word],
             ...wordData
           }
         };
 
-        setAnimalData(newestAnimal);
-        setLoadingWord(false);
+        setAnimalData(newAnimalData);
+        setLoading(false);
       } catch (error) {
         throw new Error(error);
       }
     }
-    fetchWord();
+    fetchData();
   }, [word]);
 
   const handleColorChange = (color) => {
     setColor(color);
+  };
+
+  const handleSave = () => {
+    setListAnimals([...listAnimals, {
+      word: word,
+      imageUrl: animalData[word]['imageUrl'],
+      meaning: animalData[word]['meaning'],
+      color: color,
+    }]);
+
+    console.log('listAnimal', listAnimals);
   };
 
   return (
@@ -86,26 +93,30 @@ function App() {
       />
 
       <FlashCardTemp
-        loadingWord={loadingWord}
+        loading={loading}
         animalData={animalData[word]}
         color={color.hex}
       />
 
-      {/* <button onClick={() => {
-        const animalData = {
-          id: uuidv4(),
-          ...words,
-          imageUrl,
-          color: color['hex']
-        };
-        const newListAnimals = [...listAnimals, animalData];
-        setListAnimals(newListAnimals);
-      }}>Save</button> */}
+      <button
+        onClick={handleSave}
+      >
+        Save
+      </button>
 
-      {/* <ListCard listAnimals={listAnimals} /> */}
+      <div className="list-animal">
+        {listAnimals.map(animal => (
+          <AnimalItem
+            key={animal.title}
+            imageUrl={animal.imageUrl}
+            word={animal.word}
+            color={animal.color}
+          />
+        ))}
+      </div>
 
       <Button
-        text="Generate PDF"
+        text="Generate All"
         word={word}
         animalData={animalData}
         color={color.hex}
