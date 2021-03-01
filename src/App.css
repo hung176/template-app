@@ -93,7 +93,7 @@ html {
   display: inline-block;
   height: 30px;
   line-height: 30px;
-  margin: 25px;
+  margin: 10px;
   position: relative;
   text-align: center;
   vertical-align: middle;
@@ -112,18 +112,6 @@ html {
   position: relative;
   text-transform: uppercase;
   z-index: 1;
-}
-
-.anchor-pdf a span:first-child {
-  display: none;
-}
-
-.anchor-pdf a:hover span:first-child {
-  display: inline-block;
-}
-
-.anchor-pdf a:hover span:last-child {
-  display: none;
 }
 
 /* style button */
@@ -190,16 +178,22 @@ html {
   align-items: center;
 }
 .btn-item {
+  background: #fff;
   border: none;
   border-radius: 45px;
   cursor: pointer;
   outline: none;
-  width: 100%;
+  width: 70%;
   height: 22px;
   font-size: 12px;
   margin: 5px;
   text-align: center;
 }
+
+
+
+
+
 
 @media (max-width: 400px) {
   .word-search {
@@ -220,6 +214,7 @@ html {
 
   .btn-item {
     font-size: 5px;
+    width: 100%;
   }
  
 }

@@ -130,13 +130,13 @@ function App() {
         )
       }
 
-      {/* <Button
+      <Button
         text="Generate All"
         listAnimals={listAnimals}
         isGeneratingAll={isGeneratingAll}
         setIsGeneratingAll={setIsGeneratingAll}
         setGeneratedAll={setGeneratedAll}
-      /> */}
+      />
     </div>
   );
 }
