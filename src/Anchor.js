@@ -11,7 +11,6 @@ export default function Anchor({ generated, isGenerating }) {
           visibility: generated ? 'initial' : 'hidden'
         }}
       >
-        <span>Download</span>
         <span>PDF</span>
       </a>
     </div>
