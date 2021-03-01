@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TwitterPicker } from 'react-color';
-// import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuid4 } from 'uuid';
 
 import FlashCardTemp from './FlashCardTemp';
 import CardEdit from './CardEdit';
@@ -19,8 +19,8 @@ function App() {
 
   const [animalData, setAnimalData] = useState({});
 
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [generated, setGenerated] = useState(null);
+  const [isGeneratingAll, setIsGeneratingAll] = useState(false);
+  const [generatedAll, setGeneratedAll] = useState(null);
 
   const [listAnimals, setListAnimals] = useState([]);
 
@@ -40,7 +40,7 @@ function App() {
   };
 
   useEffect(() => {
-    // setGenerated(null)
+    // setGeneratedAll(null)
     const fetchData = async () => {
       try {
         setLoading(true);
@@ -73,6 +73,7 @@ function App() {
 
   const handleSave = () => {
     setListAnimals([...listAnimals, {
+      id: uuid4(),
       word: word,
       imageUrl: animalData[word]['imageUrl'],
       meaning: animalData[word]['meaning'],
@@ -80,6 +81,12 @@ function App() {
     }]);
 
     console.log('listAnimal', listAnimals);
+  };
+
+
+  const handleDelete = (id) => {
+    const newListAnimals = listAnimals.filter(animal => animal.id !== id);
+    setListAnimals(newListAnimals);
   };
 
   return (
@@ -104,31 +111,32 @@ function App() {
         Save
       </button>
 
-      <div className="list-animal">
-        {listAnimals.map(animal => (
-          <AnimalItem
-            key={animal.title}
-            imageUrl={animal.imageUrl}
-            word={animal.word}
-            color={animal.color}
-          />
-        ))}
-      </div>
+      {listAnimals.length === 0
+        ? (<div>Press save button to store one image </div>)
+        : (
+          <div className="list-animal">
+            {listAnimals.map(animal => (
+              <AnimalItem
+                key={animal.id}
+                imageUrl={animal.imageUrl}
+                word={animal.word}
+                meaning={animal.meaning}
+                color={animal.color.hex}
+                id={animal.id}
+                handleDelete={handleDelete}
+              />
+            ))}
+          </div>
+        )
+      }
 
-      <Button
+      {/* <Button
         text="Generate All"
-        word={word}
-        animalData={animalData}
-        color={color.hex}
-        isGenerating={isGenerating}
-        setIsGenerating={setIsGenerating}
-        setGenerated={setGenerated}
-      />
-
-      <Anchor
-        generated={generated}
-        isGenerating={isGenerating}
-      />
+        listAnimals={listAnimals}
+        isGeneratingAll={isGeneratingAll}
+        setIsGeneratingAll={setIsGeneratingAll}
+        setGeneratedAll={setGeneratedAll}
+      /> */}
     </div>
   );
 }
