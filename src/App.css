@@ -86,25 +86,6 @@ html {
   }
 }
 
-@media (max-width: 400px) {
-  .word-search {
-    width: 350px;
-  }
-
-  .container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-  }
-
-  .card-container {
-    margin: 10px
-  }
- 
-}
-
 /* Anchor tag */
 
 .anchor-pdf a {
@@ -194,6 +175,7 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   border-radius: 10px;
 }
 
@@ -201,18 +183,43 @@ html {
   width: 100%;
 }
 .btn-container {
+  width: 85%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.btn-generate-item, .btn-delete-item {
+.btn-item {
   border: none;
   border-radius: 45px;
   cursor: pointer;
   outline: none;
-  width: 110px;
-  height: 25px;
-  font-size: 10px;
+  width: 100%;
+  height: 22px;
+  font-size: 12px;
   margin: 5px;
+  text-align: center;
+}
+
+@media (max-width: 400px) {
+  .word-search {
+    width: 350px;
+  }
+
+  .container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .card-container {
+    margin: 10px
+  }
+
+  .btn-item {
+    font-size: 5px;
+  }
+ 
 }

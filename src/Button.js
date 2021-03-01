@@ -2,47 +2,20 @@ import React, { useState } from 'react';
 
 export default function Button({
   text,
-  word,
-  animalData,
-  color,
-  isGenerating,
-  setIsGenerating,
-  setGenerated,
+  listAnimals,
+  isGeneratingAll,
+  setIsGeneratingAll,
+  setGeneratedAll,
 }) {
-  const generatePDF = async () => {
-    setIsGenerating(true);
-    const { meaning, imageUrl } = animalData[word];
-    const apiUrl = 'https://api.make.cm/make/t/964d132b-0be6-47f3-ba74-41f94bb35bc1/sync';
-    const params = {
-      size: 'A4',
-      format: 'pdf',
-      data: {
-        word, imageUrl, meaning, color
-      }
-    };
-
-    const { resultUrl } = await fetch(apiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-MAKE-API-KEY': 'HsB5+CDZdrs8GOMMG449IkxuxCqkiPCjbQAbZoDv'
-      },
-      body: JSON.stringify(params)
-    }).then(res => res.json())
-
-    setGenerated(resultUrl);
-    setIsGenerating(false);
-  }
-
 
   return (
     <div className="generate-button">
       <button
-        onClick={generatePDF}
-        disabled={isGenerating}
-        className={isGenerating ? 'btn-disabled' : 'btn'}
+        // onClick={}
+        disabled={isGeneratingAll}
+        className={isGeneratingAll ? 'btn-disabled' : 'btn'}
       >
-        {isGenerating ? 'Generating...' : text}
+        {isGeneratingAll ? 'Generating...' : text}
       </button>
     </div>
   );
