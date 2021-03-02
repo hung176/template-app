@@ -1,6 +1,7 @@
 import React from 'react';
 
 export default function Anchor({ generated, isGenerating }) {
+  console.log('geee', generated)
   return (
     <div className="anchor-pdf">
       <a

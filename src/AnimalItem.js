@@ -7,10 +7,10 @@ function AnimalItem({
   word,
   meaning,
   color,
-  handleDelete
+  handleDelete,
+  generated,
 }) {
   const [isGenerating, setIsGenerating] = useState(false);
-  const [generated, setGenerated] = useState(null);
 
   const generateItem = async() => {
     setIsGenerating(true);
@@ -32,7 +32,6 @@ function AnimalItem({
       body: JSON.stringify(params)
     }).then(res => res.json())
 
-    setGenerated(resultUrl);
     setIsGenerating(false);
   };
 
@@ -64,6 +63,7 @@ function AnimalItem({
           isGenerating={isGenerating}
         />
       }
+
     </div>
   )
 }

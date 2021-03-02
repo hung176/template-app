@@ -6,12 +6,13 @@ export default function Button({
   isGeneratingAll,
   setIsGeneratingAll,
   setGeneratedAll,
+  handleGenerateAll
 }) {
 
   return (
     <div className="generate-button">
       <button
-        // onClick={}
+        onClick={handleGenerateAll}
         disabled={isGeneratingAll}
         className={isGeneratingAll ? 'btn-disabled' : 'btn'}
       >
