@@ -11,6 +11,7 @@ function AnimalItem({
   generated,
 }) {
   const [isGenerating, setIsGenerating] = useState(false);
+  const [generatedItem, setGeneratedItem] = useState({});
 
   const generateItem = async() => {
     setIsGenerating(true);
@@ -31,7 +32,7 @@ function AnimalItem({
       },
       body: JSON.stringify(params)
     }).then(res => res.json())
-
+    setGeneratedItem({ [id]: resultUrl });
     setIsGenerating(false);
   };
 
