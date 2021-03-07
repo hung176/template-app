@@ -1,14 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 export default function Button({
   text,
-  listAnimals,
   isGeneratingAll,
-  setIsGeneratingAll,
-  setGeneratedAll,
   handleGenerateAll
 }) {
-
   return (
     <div className="generate-button">
       <button

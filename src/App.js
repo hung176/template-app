@@ -19,8 +19,7 @@ function App() {
 
   const [animalData, setAnimalData] = useState({});
 
-  const [isGeneratingAll, setIsGeneratingAll] = useState(false);
-  const [generatedAll, setGeneratedAll] = useState([]);
+  const [generatedAll, setGeneratedAll] = useState({});
 
   const [listAnimals, setListAnimals] = useState([]);
 
@@ -87,11 +86,9 @@ function App() {
     setListAnimals(newListAnimals);
   };
 
-  const handleGenerateAll = () => {
-    setIsGeneratingAll(true);
-    const newList = listAnimals.map(async an => {
+  const handleGenerateAll = async() => {
+    for(const an of listAnimals) {
       const { word, imageUrl, meaning, color, id } = an;
-
       const apiUrl = 'https://api.make.cm/make/t/964d132b-0be6-47f3-ba74-41f94bb35bc1/sync';
       const params = {
         size: 'A4',
@@ -110,13 +107,18 @@ function App() {
         body: JSON.stringify(params)
       })
       .then(res => res.json())
-
-      return { [id]: resultUrl };
-    })
-    Promise.all(newList).then(res => {
-      return res.reduce((acc, val) => ({...acc, ...val}),{});
-    }).then(res => setGeneratedAll(res));
-    setIsGeneratingAll(false);
+      setGeneratedAll(prev => {
+        return {
+          ...prev,
+          [id]: resultUrl
+        }
+      })
+    }
+    // Promise.all(newList).then(res => {
+    //   return res.reduce((acc, val) => ({...acc, ...val}),{});
+    // }).then(res => {
+    //   setGeneratedAll(res);
+    // });
   };
 
   return (
@@ -164,9 +166,6 @@ function App() {
       <Button
         text="Generate All"
         listAnimals={listAnimals}
-        isGeneratingAll={isGeneratingAll}
-        setIsGeneratingAll={setIsGeneratingAll}
-        setGeneratedAll={setGeneratedAll}
         handleGenerateAll={handleGenerateAll}
       />
     </div>
