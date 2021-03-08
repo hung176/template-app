@@ -10,6 +10,7 @@ function AnimalItem({
   handleDelete,
   generated,
 }) {
+
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedItem, setGeneratedItem] = useState({});
 
@@ -61,7 +62,6 @@ function AnimalItem({
       {generated &&
         <Anchor 
           generated={generated}
-          isGenerating={isGenerating}
         />
       }
 

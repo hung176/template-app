@@ -1,18 +1,23 @@
 import React from 'react';
+import Loading from './Loading';
 
-export default function Anchor({ generated, isGenerating }) {
+export default function Anchor({ generated }) {
+  const { loading, result } = generated;
+
   return (
     <div className="anchor-pdf">
-      <a
-        href={generated}
+      {loading && <Loading />}
+
+      {!loading && <a
+        href={result}
         target="_blank"
         rel="noreferrer"
         style={{
-          visibility: generated ? 'initial' : 'hidden'
+          visibility: result ? 'initial' : 'hidden'
         }}
       >
         <span>PDF</span>
-      </a>
+      </a>}
     </div>
   );
 }

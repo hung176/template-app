@@ -5,7 +5,6 @@ import { v4 as uuid4 } from 'uuid';
 import FlashCardTemp from './FlashCardTemp';
 import CardEdit from './CardEdit';
 import Button from './Button';
-// import Anchor from './Anchor';
 import AnimalItem from './AnimalItem';
 
 import { fetchPhotos, fetchWord } from './animalImg';
@@ -20,6 +19,7 @@ function App() {
   const [animalData, setAnimalData] = useState({});
 
   const [generatedAll, setGeneratedAll] = useState({});
+  console.log(generatedAll);
 
   const [listAnimals, setListAnimals] = useState([]);
 
@@ -78,7 +78,6 @@ function App() {
       meaning: animalData[word]['meaning'],
       color: color.hex,
     }]);
-
   };
 
   const handleDelete = (id) => {
@@ -89,6 +88,17 @@ function App() {
   const handleGenerateAll = async() => {
     for(const an of listAnimals) {
       const { word, imageUrl, meaning, color, id } = an;
+
+      setGeneratedAll(prev => {
+        return {
+          ...prev,
+          [id]: {
+            loading: true,
+            result: ''
+          }
+        }
+      })
+
       const apiUrl = 'https://api.make.cm/make/t/964d132b-0be6-47f3-ba74-41f94bb35bc1/sync';
       const params = {
         size: 'A4',
@@ -110,15 +120,14 @@ function App() {
       setGeneratedAll(prev => {
         return {
           ...prev,
-          [id]: resultUrl
+          [id]: {
+            loading: false,
+            result: resultUrl
+          }
         }
       })
     }
-    // Promise.all(newList).then(res => {
-    //   return res.reduce((acc, val) => ({...acc, ...val}),{});
-    // }).then(res => {
-    //   setGeneratedAll(res);
-    // });
+
   };
 
   return (
