@@ -85,9 +85,13 @@ function App() {
     setListAnimals(newListAnimals);
   };
 
-  const handleGenerateAll = async() => {
-    for(const an of listAnimals) {
+  const handleGenerateAll = () => {
+    listAnimals.forEach(async an => {
       const { word, imageUrl, meaning, color, id } = an;
+
+      if(generatedAll[id]) {
+        return;
+      }
 
       setGeneratedAll(prev => {
         return {
@@ -126,7 +130,7 @@ function App() {
           }
         }
       })
-    }
+    })
 
   };
 

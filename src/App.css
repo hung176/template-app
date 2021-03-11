@@ -61,8 +61,8 @@ html {
 }
 
 .spin {
-  border: 5px solid lightgray;
-  border-top: 5px solid rgb(164, 225, 243);
+  border: 5px solid rgb(218, 216, 216);
+  border-top: 5px solid rgb(255, 255, 255);
   width: 25px;
   height: 25px;
   border-radius: 50%;
@@ -121,7 +121,7 @@ html {
 /* style button */
 
 .generate-button {
-  margin-top: 20px;
+  margin: 20px;
   display: flex;
   align-items: center;
   justify-content: center;

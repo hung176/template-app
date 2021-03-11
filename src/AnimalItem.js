@@ -12,9 +12,10 @@ function AnimalItem({
 }) {
 
   const [isGenerating, setIsGenerating] = useState(false);
-  const [generatedItem, setGeneratedItem] = useState({});
+  const [generatedItem, setGeneratedItem] = useState('');
 
   const generateItem = async() => {
+    
     setIsGenerating(true);
     const apiUrl = 'https://api.make.cm/make/t/964d132b-0be6-47f3-ba74-41f94bb35bc1/sync';
     const params = {
@@ -33,7 +34,7 @@ function AnimalItem({
       },
       body: JSON.stringify(params)
     }).then(res => res.json())
-    setGeneratedItem({ [id]: resultUrl });
+    setGeneratedItem(resultUrl);
     setIsGenerating(false);
   };
 
