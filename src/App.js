@@ -151,10 +151,19 @@ function App() {
       />
 
       <button
+        className="btn"
         onClick={handleSave}
       >
         Save
       </button>
+
+      <Button
+        text="Generate All"
+        listAnimals={listAnimals}
+        handleGenerateAll={handleGenerateAll}
+        isGeneratingAll={Object.keys(generatedAll).some(id => generatedAll[id].loading)}
+        isEmptyList = {listAnimals.length === 0}
+      />
 
       {listAnimals.length === 0
         ? (<div>Press save button to store one image </div>)
@@ -176,12 +185,6 @@ function App() {
         )
       }
 
-      <Button
-        text="Generate All"
-        listAnimals={listAnimals}
-        handleGenerateAll={handleGenerateAll}
-        isGeneratingAll={Object.keys(generatedAll).some(id => generatedAll[id].loading)}
-      />
     </div>
   );
 }
