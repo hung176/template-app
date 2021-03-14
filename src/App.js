@@ -19,7 +19,6 @@ function App() {
   const [animalData, setAnimalData] = useState({});
 
   const [generatedAll, setGeneratedAll] = useState({});
-  console.log(generatedAll);
 
   const [listAnimals, setListAnimals] = useState([]);
 
@@ -86,6 +85,7 @@ function App() {
   };
 
   const handleGenerateAll = () => {
+
     listAnimals.forEach(async an => {
       const { word, imageUrl, meaning, color, id } = an;
 
@@ -180,6 +180,7 @@ function App() {
         text="Generate All"
         listAnimals={listAnimals}
         handleGenerateAll={handleGenerateAll}
+        isGeneratingAll={Object.keys(generatedAll).some(id => generatedAll[id].loading)}
       />
     </div>
   );
