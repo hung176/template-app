@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { TwitterPicker } from 'react-color';
 import { v4 as uuid4 } from 'uuid';
 
+import Header from './Header';
 import FlashCardTemp from './FlashCardTemp';
 import CardEdit from './CardEdit';
 import Button from './Button';
@@ -9,6 +10,7 @@ import AnimalItem from './AnimalItem';
 
 import { fetchPhotos, fetchWord } from './animalImg';
 
+import bee from './Busy Bee.gif';
 import './App.css';
 
 function App() {
@@ -136,7 +138,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>ANIMAL FLASHCARD FOR KID</h1>
+      <Header />
       <CardEdit setWord={setWord} animalData={animalData} />
       <TwitterPicker
         triangle="hide"
