@@ -138,7 +138,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <Header color={color.hex} />
       <CardEdit setWord={setWord} animalData={animalData} />
       <TwitterPicker
         triangle="hide"
